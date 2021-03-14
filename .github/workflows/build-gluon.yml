@@ -20,7 +20,7 @@ jobs:
       - name: Install Dependencies
         run: sudo ci/install-dependencies.sh
       - name: Update gluon-site supmodule
-        run: ci/update-submodule.sh
+        run: ci/update-site.sh
       - name: Build
         run: ci/run-build.sh ${{ matrix.target }}
       - name: Archive build logs

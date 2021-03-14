@@ -3,4 +3,4 @@
 set -e
 
 cd gluon-site
-git pull
+git pull --ff-only
