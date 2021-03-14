@@ -13,7 +13,10 @@ jobs:
         target: [ x86-64, ramips-mt76x8 ]
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Install Dependencies
         run: sudo ci/install-dependencies.sh
       - name: Build
