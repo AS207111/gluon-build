@@ -19,6 +19,8 @@ jobs:
           submodules: recursive
       - name: Install Dependencies
         run: sudo ci/install-dependencies.sh
+      - name: Update gluon-site supmodule
+        run: ci/update-submodule.sh
       - name: Build
         run: ci/run-build.sh ${{ matrix.target }}
       - name: Archive build logs
