@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ ramips-mt76x8 ]
+        target: [ x86-64, ramips-mt76x8 ]
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
