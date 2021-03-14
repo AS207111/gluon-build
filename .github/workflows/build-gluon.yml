@@ -28,10 +28,10 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.target }}_logs
-          path: openwrt/logs
+          path: gluon/openwrt/logs
       - name: Archive build output
         uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.target }}_output
-          path: output
+          path: gluon/output
 
