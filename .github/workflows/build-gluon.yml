@@ -23,6 +23,8 @@ jobs:
         run: ci/update-site.sh
       - name: Build
         run: ci/run-build.sh ${{ matrix.target }}
+        env:
+          SECRETKEY: ${{ secrets.SECRETKEY }}
       - name: Archive build logs
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v1
