@@ -19,8 +19,8 @@ jobs:
           submodules: recursive
       - name: Build
         run: |
-          apt update
-          apt install git subversion python3 build-essential gawk unzip libncurses-dev libz-dev libssl-dev wget time qemu-utils
+          sudo apt-get update
+          sudo apt-get install git subversion python3 build-essential gawk unzip libncurses-dev libz-dev libssl-dev wget time qemu-utils
           git clone https://github.com/freifunk-gluon/gluon.git gluon -b v2021.1
           cd gluon
           git clone https://github.com/AS207111/gluon-site.git site
