@@ -15,7 +15,4 @@ cp -r firmware gluon/output
 cd gluon
 make update
 make manifest GLUON_RELEASE=$GLUON_RELEASE GLUON_AUTOUPDATER_BRANCH=experimental
-
-contrib/sign.sh "$SECRETKEY" output/images/factory/experimental.manifest
-contrib/sign.sh "$SECRETKEY" output/images/other/experimental.manifest
-contrib/sign.sh "$SECRETKEY" output/images/sysupgrade/experimental.manifest
+make manifest GLUON_RELEASE=$GLUON_RELEASE GLUON_AUTOUPDATER_BRANCH=stable
