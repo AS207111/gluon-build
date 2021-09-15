@@ -1,0 +1,24 @@
+name: Build Gluon
+on:
+  push:
+    branches:
+      - sign
+jobs:
+  sign_firmware:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install Dependencies
+        run: sudo ci/install-dependencies.sh
+      - name: Update gluon-site
+        run: ci/update-site.sh
+      - name: Sign
+        run: ci/run-sign.sh
+      - name: Archive build output
+        uses: actions/upload-artifact@v1
+        with:
+          name: output
+          path: gluon/output
