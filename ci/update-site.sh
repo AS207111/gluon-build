@@ -2,5 +2,4 @@
 
 set -e
 
-cd gluon-site
-git pull --ff-only
+git clone https://github.com/AS207111/gluon-site.git gluon-site
