@@ -17,15 +17,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Install Dependencies
+        run: sudo ci/install-dependencies.sh
+      - name: Update gluon-site supmodule
+        run: ci/update-site.sh
       - name: Build
-        run: |
-          sudo apt-get update
-          sudo apt-get install git subversion python3 build-essential gawk unzip libncurses-dev libz-dev libssl-dev wget time qemu-utils
-          git clone https://github.com/freifunk-gluon/gluon.git gluon -b v2021.1
-          cd gluon
-          git clone https://github.com/AS207111/gluon-site.git site
-          make update
-          make GLUON_TARGET=${{ matrix.target }}
+        run: ci/run-build.sh ${{ matrix.target }}
       - name: Archive build logs
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v1
