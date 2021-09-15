@@ -14,7 +14,7 @@ git clone https://github.com/freifunk-gluon/gluon.git gluon -b v2021.1
 cp -r firmware gluon/output
 cd gluon
 make update
-make manifest
+make manifest GLUON_RELEASE=$GLUON_RELEASE GLUON_AUTOUPDATER_BRANCH=experimental
 
 contrib/sign.sh "$SECRETKEY" output/images/factory/experimental.manifest
 contrib/sign.sh "$SECRETKEY" output/images/other/experimental.manifest
