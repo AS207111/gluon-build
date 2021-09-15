@@ -13,5 +13,3 @@ export NUM_CORES_PLUS_ONE=$(expr $(nproc) + 1)
 cd gluon
 make update
 make -j$NUM_CORES_PLUS_ONE V=s
-make manifest GLUON_AUTOUPDATER_BRANCH=experimental
-contrib/sign.sh $SECRETKEY output/images/sysupgrade/experimental.manifest
