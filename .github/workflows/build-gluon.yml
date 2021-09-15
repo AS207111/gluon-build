@@ -28,4 +28,10 @@ jobs:
         with:
           name: ${{ matrix.target }}_output
           path: gluon/output
+      - name: Archive build logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.target }}_logs
+          path: gluon/openwrt/logs
 
