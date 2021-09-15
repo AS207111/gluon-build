@@ -23,12 +23,6 @@ jobs:
         run: ci/update-site.sh
       - name: Build
         run: ci/run-build.sh ${{ matrix.target }}
-      - name: Archive build logs
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ matrix.target }}_logs
-          path: gluon/openwrt/logs
       - name: Archive build output
         uses: actions/upload-artifact@v1
         with:
