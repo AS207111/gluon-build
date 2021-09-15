@@ -1,6 +1,0 @@
-[submodule "gluon"]
-	path = gluon
-	url = git@github.com:AS207111/gluon.git
-[submodule "gluon-site"]
-	path = gluon-site
-	url = git@github.com:AS207111/gluon-site.git

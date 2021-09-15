@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ x86-64, ramips-mt76x8 ]
+        target: [ x86-64, ramips-mt76x8, ramips-mt7620, ath79-generic ]
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout repository and submodules
@@ -23,17 +23,15 @@ jobs:
         run: ci/update-site.sh
       - name: Build
         run: ci/run-build.sh ${{ matrix.target }}
-        env:
-          SECRETKEY: ${{ secrets.SECRETKEY }}
+      - name: Archive build output
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.target }}_output
+          path: gluon/output
       - name: Archive build logs
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.target }}_logs
           path: gluon/openwrt/logs
-      - name: Archive build output
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ matrix.target }}_output
-          path: gluon/output
 
