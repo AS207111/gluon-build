@@ -2,7 +2,7 @@ name: Build Gluon
 on:
   push:
     branches:
-      - main
+      - ense
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
