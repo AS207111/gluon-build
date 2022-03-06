@@ -1,12 +1,45 @@
 name: Build Gluon 
 on:
-  push:
-    branches:
-      - ense
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch'
+        required: true
+        default: 'ense'
+        type: choice
+        options:
+          - ense
+          - main
 jobs:
-  build_firmware:
+  build_stable_firmware:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [ x86-64, ramips-mt76x8, ramips-mt7620, ath79-generic, ar71xx-tiny ]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install Dependencies
+        run: sudo ci/install-dependencies.sh
+      - name: Update gluon-site supmodule
+        run: ci/update-site.sh ${{ github.event.inputs.branch }}
+      - name: Build
+        run: ci/run-build.sh ${{ matrix.target }} v2021.1
+      - name: Archive build output
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.target }}_output_stable
+          path: gluon/output
+      - name: Archive build logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.target }}_logs_stable
+          path: gluon/openwrt/logs
+  build_experimental_firmware:
     strategy:
       fail-fast: false
       matrix:
@@ -20,18 +53,18 @@ jobs:
       - name: Install Dependencies
         run: sudo ci/install-dependencies.sh
       - name: Update gluon-site supmodule
-        run: ci/update-site.sh
+        run: ci/update-site.sh ${{ github.event.inputs.branch }}
       - name: Build
-        run: ci/run-build.sh ${{ matrix.target }}
+        run: ci/run-build.sh ${{ matrix.target }} master
       - name: Archive build output
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ matrix.target }}_output
+          name: ${{ matrix.target }}_output_experimental
           path: gluon/output
       - name: Archive build logs
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ matrix.target }}_logs
+          name: ${{ matrix.target }}_logs_experimental
           path: gluon/openwrt/logs
 
