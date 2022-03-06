@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ x86-64, ramips-mt76x8, ramips-mt7620, ath79-generic, ar71xx-tiny ]
+        target: [ x86-64, ramips-mt76x8, ramips-mt7620, ath79-generic, ar71xx-generic, ar71xx-nand ]
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout repository and submodules
