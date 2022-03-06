@@ -27,7 +27,7 @@ jobs:
       - name: Update gluon-site supmodule
         run: ci/update-site.sh ${{ github.event.inputs.branch }}
       - name: Build
-        run: ci/run-build.sh ${{ matrix.target }} v2021.1
+        run: ci/run-build.sh ${{ matrix.target }} v2021.1 stable
       - name: Archive build output
         uses: actions/upload-artifact@v1
         with:
@@ -55,7 +55,7 @@ jobs:
       - name: Update gluon-site supmodule
         run: ci/update-site.sh ${{ github.event.inputs.branch }}
       - name: Build
-        run: ci/run-build.sh ${{ matrix.target }} master
+        run: ci/run-build.sh ${{ matrix.target }} master experimental
       - name: Archive build output
         uses: actions/upload-artifact@v1
         with:
