@@ -8,6 +8,8 @@ export GLUON_DEPRECATED=0
 export GLUON_SITEDIR="../gluon-site"
 export GLUON_TARGET=$1
 export GLUON_BRANCH=$3
+export GLUON_AUTOUPDATER_BRANCH=$3
+export GLUON_AUTOUPDATER_ENABLED=1
 export BUILD_LOG=1
 export NUM_CORES_PLUS_ONE=$(expr $(nproc) + 1)
 
